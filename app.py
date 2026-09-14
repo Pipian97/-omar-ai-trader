@@ -73,3 +73,27 @@ st.warning(
     "Backtests can overstate results. They do not fully reproduce slippage, queue priority, "
     "latency, partial fills, changing market regimes, or future performance."
 )
+st.divider()
+st.subheader("🔎 Market Scanner")
+
+with st.spinner("Scanning market..."):
+    scan_results = scan_market()
+
+scanner_rows = []
+for result in scan_results:
+    if hasattr(result, "symbol"):
+    scanner_rows.append({         
+        "Symbol": result.symbol,
+        "Signal": result.action,
+        "Confidence": f"{result.confidence:.1%}",
+        "Price": f"${result.price:,.2f}",
+    })
+
+if scanner_rows:
+     st.dataframe(
+        pd.DataFrame(scanner_rows),
+l.      use_container_width=True,
+        hide_index=True,
+      )
+else:
+     st.info("No scanner results available.")
