@@ -16,7 +16,21 @@ st.caption("Paper-trading research terminal — no profit guarantees")
 
 with st.sidebar:
     symbol = st.selectbox("Symbol", CONFIG.watchlist)
-   
+   try:
+
+     trading_client, _ = get_clients()
+
+        account = trading_client.get_account()
+
+        account_equity = float(account.equity)
+
+        st.metric("Paper account equity ($)", f"${account_equity:,.2f}")
+
+    except Exception as e:
+
+        st.error(f"Paper account error: {e}")
+
+        st.stop()
     threshold = st.slider("Signal threshold", 0.50, 0.90, CONFIG.confidence_threshold, 0.01)
     st.info("LIVE MONEY IS DISABLED IN THIS STARTER VERSION.")
 
