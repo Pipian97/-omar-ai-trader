@@ -82,11 +82,11 @@ with st.spinner("Scanning market..."):
 scanner_rows = []
 for result in scan_results:
     if hasattr(result, "symbol"):
-    scanner_rows.append({         
-        "Symbol": result.symbol,
-        "Signal": result.action,
-        "Confidence": f"{result.confidence:.1%}",
-        "Price": f"${result.price:,.2f}",
+        scanner_rows.append({         
+            "Symbol": result.symbol,
+            "Signal": result.action,
+            "Confidence": f"{result.confidence:.1%}",
+            "Price": f"${result.price:,.2f}",
     })
 if scanner_rows:
     st.dataframe(pd.DataFrame(scanner_rows), hide_index=True)
