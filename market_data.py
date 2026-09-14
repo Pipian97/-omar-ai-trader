@@ -3,6 +3,7 @@ import pandas as pd
 
 def fetch_bars(symbol: str, timeframe_minutes: int = 5, lookback_days: int = 30) -> pd.DataFrame:
     from alpaca.data.requests import StockBarsRequest
+    from alpaca.data.enums import DataFeed
     from alpaca.data.timeframe import TimeFrame, TimeFrameUnit
     from broker import get_clients
 
@@ -17,6 +18,7 @@ def fetch_bars(symbol: str, timeframe_minutes: int = 5, lookback_days: int = 30)
         start=start,
         end=end,
         limit=10000,
+        feed=DataFeed.IEX,
     )
     result = client.get_stock_bars(req).df
     if result.empty:
