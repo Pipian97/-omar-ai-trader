@@ -100,4 +100,42 @@ if scanner_rows:
     st.dataframe(pd.DataFrame(scanner_rows), hide_index=True)
 else:
     st.info("No scanner results available.")
+    if scanner_rows:
+       top_trade = next(
+           (
+               r for r in scan_results
+               if hasattr(r, "symbol") 
+               and r.action == "BUY"
+               and r.confidence >= threshold
+               and r.stop
+               and r.target
+            ),
+            None,
+       )
+       if top_trade:
+           qty = position_size(
+               account_equity,
+               top_trade.price,
+               top_trade.stop,
+               CONFIG.risk_per_trade_pct,
+           )
+           st.subheader("🧪 Manual Paper Trade")
+           st.write(
+               f"{top_trade.symbol} | Qty: {qty} | "
+               f"Entry: ${top_trade.price:,.2f} | "
+               f"Stop: ${top_trade.stop:,.2f} | "
+               f"Target: ${top_trade.target:,.2f}"
+           )
+           
+           if st.button(f"Send PAPER BUY for {top_trade.symbol}"):
+               order = submit_paper_bracket(
+                   top_trade.symbol,
+                   qty,
+                   top_trade.stop,
+                   top_trade.target,
+               )
+               if order:
+                   st.success("Paper order submitted.")
+               else:
+                   st.warning("Paper order was not submitted.")
 
