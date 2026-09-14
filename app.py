@@ -4,10 +4,11 @@ import plotly.graph_objects as go
 
 from config import CONFIG
 from market_data import fetch_bars
-from indicators import add_indicators
+from indicators import add_indicator
 from strategy import score_latest
 from backtest import run_backtest
 from risk import position_size
+from broker import get_clients
 
 st.set_page_config(page_title="OMAR AI TRADER", layout="wide")
 st.title("OMAR AI TRADER")
