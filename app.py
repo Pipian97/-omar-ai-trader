@@ -13,13 +13,13 @@ from broker import get_clients
 st.set_page_config(page_title="OMAR AI TRADER", layout="wide")
 st.title("OMAR AI TRADER")
 st.caption("Paper-trading research terminal — no profit guarantees")
-
+trading_client, _ = get_clients()
+account_equity = float(trading_client.get_account().equity)
+st.metric("Paper account equity ($)", f"${account_equity:,.2f}")
 with st.sidebar:
     symbol = st.selectbox("Symbol", CONFIG.watchlist)
-
-    threshold = st.slider("Signal threshold", 0.50, 0.90, CONFIG.confidence_threshold, 0.01)
+threshold = st.slider("Signal threshold", 0.50, 0.90, CONFIG.confidence_threshold, 0.01)
     st.info("LIVE MONEY IS DISABLED IN THIS STARTER VERSION.")
-
 try:
     df = fetch_bars(symbol, CONFIG.timeframe_minutes, CONFIG.lookback_days)
 except Exception as e:
