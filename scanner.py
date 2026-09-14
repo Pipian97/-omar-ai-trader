@@ -19,7 +19,7 @@ def scan_market(symbols=None):
             out.append(sig)
         except Exception as e:
             out.append({"symbol": symbol, "error": str(e)})
-    return out
+    return sorted(out, key=lambda x: getattr(x, "confidence", -1), reverse=True)
 
 if __name__ == "__main__":
     for x in scan_market():
