@@ -87,7 +87,11 @@ for result in scan_results:
             "Signal": result.action,
             "Confidence": f"{result.confidence:.1%}",
             "Price": f"${result.price:,.2f}",
-    })
+            "Entry": f"${result.price:,.2f}",
+            "Stop": f"${result.stop:,.2f}" if result.stop else "—",
+            "Target": f"${result.target:,.2f}" if result.target else "—",
+            "Size": position_size(account_equity, result.price, result.stop) if result.stop else 0,
+        })
 if scanner_rows:
     st.dataframe(pd.DataFrame(scanner_rows), hide_index=True)
 else:
