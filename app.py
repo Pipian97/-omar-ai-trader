@@ -128,7 +128,12 @@ if scanner_rows:
             f"Target: ${top_trade.target:,.2f}"
         )
            
-        if st.button(f"Send PAPER BUY for {top_trade.symbol}"):
+        confirm_trade = st.checkbox(
+            f"I confirm this PAPER trade for {top_trade.symbol}"
+        )
+        if confirm_trade and st.button(
+            f"Send PAPER BUY for {top_trade.symbol}"
+        ):
             order = submit_paper_bracket(
                 top_trade.symbol,
                 qty,
