@@ -80,8 +80,12 @@ with st.spinner("Scanning market..."):
     scan_results = scan_market()
 
 scanner_rows = []
-for result in scan_results:
-    if hasattr(result, "symbol"):
+for result in scan_results:          
+    if (
+        hasattr(result, "symbol")
+        and result.action in ("BUY", "SELL")
+        and result.confidence >= threshold
+    ):
         scanner_rows.append({         
             "Symbol": result.symbol,
             "Signal": result.action,
