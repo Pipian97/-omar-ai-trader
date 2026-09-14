@@ -4,7 +4,7 @@ import plotly.graph_objects as go
 
 from config import CONFIG
 from market_data import fetch_bars
-from indicators import add_indicator
+from indicators import add_indicators
 from strategy import score_latest
 from backtest import run_backtest
 from risk import position_size
