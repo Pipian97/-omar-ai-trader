@@ -9,6 +9,7 @@ from strategy import score_latest
 from backtest import run_backtest
 from risk import position_size
 from broker import get_clients
+from scanner import scan_market
 
 st.set_page_config(page_title="OMAR AI TRADER", layout="wide")
 st.title("OMAR AI TRADER")
