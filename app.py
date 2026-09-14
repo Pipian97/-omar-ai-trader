@@ -16,7 +16,7 @@ st.caption("Paper-trading research terminal — no profit guarantees")
 
 with st.sidebar:
     symbol = st.selectbox("Symbol", CONFIG.watchlist)
-    account_equity = st.number_input("Paper account equity ($)", min_value=100.0, value=10000.0, step=500.0)
+   
     threshold = st.slider("Signal threshold", 0.50, 0.90, CONFIG.confidence_threshold, 0.01)
     st.info("LIVE MONEY IS DISABLED IN THIS STARTER VERSION.")
 
