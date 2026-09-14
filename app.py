@@ -88,12 +88,8 @@ for result in scan_results:
         "Confidence": f"{result.confidence:.1%}",
         "Price": f"${result.price:,.2f}",
     })
-
 if scanner_rows:
-     st.dataframe(
-        pd.DataFrame(scanner_rows),
-l.      use_container_width=True,
-        hide_index=True,
-      )
+    st.dataframe(pd.DataFrame(scanner_rows), hide_index=True)
 else:
-     st.info("No scanner results available.")
+    st.info("No scanner results available.")
+
