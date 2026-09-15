@@ -12,14 +12,7 @@ from risk import position_size
 from broker import get_clients, submit_paper_bracket
 from scanner import scan_market
 
-st.set_page_config(
-    page_title="OMAR AI TRADER".             
-    page_icon="📈",
-    layout="wide",
-    initial_sidebar_state="collapsed",
-)
-
-# ---------- CUSTOM STYLE ----------
+ # ---------- CUSTOM STYLE ----------
 st.markdown(
     """
     <style>
